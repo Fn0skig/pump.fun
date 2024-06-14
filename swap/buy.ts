@@ -14,7 +14,7 @@ import { PUMP_URL } from "../config/url";
  * @returns The transaction signature.
  * @throws If the purchase fails.
  */
-async function buy(
+async function buyPumpToken(
   web3Connection: Connection,
   mint: string,
   buyerPrivateKey: string,
@@ -49,4 +49,4 @@ async function buy(
   }
 }
 
-export { buy };
+export { buyPumpToken };
