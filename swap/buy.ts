@@ -1,32 +1,30 @@
-const {
-  VersionedTransaction,
-  Connection,
-  Keypair,
-} = require("@solana/web3.js");
+import { Connection, Keypair, VersionedTransaction } from "@solana/web3.js";
+import bs58 from "bs58";
+import { PUMP_URL } from "../config/url";
 
 /**
  * Buy a token on the Solana blockchain.
  *
- * @param {Connection} web3Connection - The connection to the Solana blockchain.
- * @param {string} mint - The token address from pump.fun.
- * @param {string} buyerPrivateKey - The buyer's wallet private key.
- * @param {number} amountInSol - The amount of SOL to use for the purchase.
- * @param {number} slippagePercent - The allowed slippage percentage.
- * @param {number} priorityFee - The priority fee in SOL.
- * @returns {Promise<string>} The transaction signature.
- * @throws {Error} If the purchase fails.
+ * @param web3Connection - The connection to the Solana blockchain.
+ * @param mint - The token address from pump.fun.
+ * @param buyerPrivateKey - The buyer's wallet private key.
+ * @param amountInSol - The amount of SOL to use for the purchase.
+ * @param slippagePercent - The allowed slippage percentage.
+ * @param priorityFee - The priority fee in SOL.
+ * @returns The transaction signature.
+ * @throws If the purchase fails.
  */
 async function buy(
-  web3Connection,
-  mint,
-  buyerPrivateKey,
-  amountInSol,
-  slippagePercent,
-  priorityFee
+  web3Connection: Connection,
+  mint: string,
+  buyerPrivateKey: string,
+  amountInSol: string,
+  slippagePercent: number,
+  priorityFee: number
 ) {
   const signerKeyPair = Keypair.fromSecretKey(bs58.decode(buyerPrivateKey));
 
-  const response = await fetch(PUMP_URL * "/buy", {
+  const response = await fetch(PUMP_URL + "/buy", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -51,4 +49,4 @@ async function buy(
   }
 }
 
-module.exports = { buy };
+export { buy };

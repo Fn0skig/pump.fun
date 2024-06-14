@@ -1,9 +1,11 @@
 {
   "name": "pump.fun",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "pump.fun api sdk",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "npm run test"
   },
   "repository": {
@@ -27,5 +29,10 @@
   "homepage": "https://github.com/Fn0skig/pump.fun#readme",
   "dependencies": {
     "@solana/web3.js": "^1.93.0"
+  },
+  "devDependencies": {
+    "@types/bs58": "^4.0.4",
+    "@types/node": "^20.14.2",
+    "typescript": "^5.4.5"
   }
 }
