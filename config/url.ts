@@ -1,1 +1,1 @@
-export const PUMP_URL: string = "https://api.pumpdata.fun/";
+export const PUMP_URL: string = "https://api.pumpdata.fun";

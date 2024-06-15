@@ -1,6 +1,7 @@
 import { Connection, Keypair, VersionedTransaction } from "@solana/web3.js";
 import bs58 from "bs58";
 import { PUMP_URL } from "../config/url";
+import { sendAndConfirm } from "./confirm";
 
 /**
  * Sell a token on the Solana blockchain.
@@ -18,12 +19,12 @@ async function sellPumpToken(
   web3Connection: Connection,
   mint: string,
   sellerPrivateKey: string,
-  tokens: string,
+  tokens: number,
   slippagePercent: number,
   priorityFee: number
 ) {
   const signerKeyPair = Keypair.fromSecretKey(bs58.decode(sellerPrivateKey));
-
+  console.log("   💸 - Sending sell request to pump.fun...");
   const response = await fetch(PUMP_URL + "/sell", {
     method: "POST",
     headers: {
@@ -39,11 +40,11 @@ async function sellPumpToken(
   });
 
   if (response.status === 200) {
-    const data = await response.arrayBuffer();
-    const tx = VersionedTransaction.deserialize(new Uint8Array(data));
-    tx.sign([signerKeyPair]);
-    const signature = await web3Connection.sendTransaction(tx);
-    return signature;
+    return sendAndConfirm(
+      web3Connection,
+      await response.arrayBuffer(),
+      signerKeyPair
+    );
   } else {
     throw new Error("Failed to sell token: " + response.statusText);
   }
