@@ -44,7 +44,7 @@ const signature = await sellPumpToken(
 
 **It's that simple!**
 
-In the background the library will handle all the necessary steps to buy and sell pump.fun tokens. and utalizing the (pumpdata.fun)[https://github.com/Fn0skig/api.pump.fun] rest api to create the transaction data.
+In the background the library will handle all the necessary steps to buy and sell pump.fun tokens. and utalizing the [pumpdata.fun](https://github.com/Fn0skig/api.pump.fun) rest api to create the transaction data.
 
 ### Features 🎉
 
